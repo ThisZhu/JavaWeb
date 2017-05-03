@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
    <table style="background:White" height="5" width="100%" ><tr><td></td></tr> </table>
     <table style="width:100%;height:3%"><tr>
-    <td style="width:7%;" ><a style="width:100%;" class="easyui-linkbutton"  align="right">添加</a></td>
+    <td style="width:7%;" ><a style="width:100%;" class="easyui-linkbutton"  align="right" onclick="onAdd()">添加</a></td>
     <td style="width:7%;" ><a style="width:100%;" class="easyui-menubutton" data-options="menu:'#mm3'" align="right">筛选</a></td>
      <td style="width:86%;" ></td>
     </tr></table>
@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		 <table style="background:White" height="5" width="100%" ><tr><td></td></tr> </table>
  		<table  style="background:#ADD8E6"  width="100%" >
  		<tr>
- 		<td><table border="0" width="100%"><tr><td width="25%">编号：<%=rs.getString("id") %></td><td width="20%">菜品名：<%=rs.getString("name") %></td><td >类型：<%=rs.getString("type") %></td><td width="20%"><img src=<%=rs.getString("url") %>></td><td width="10%"><a class="easyui-linkbutton" onclick="onEdit()">编辑</a></td><td width="10%"><a class="easyui-linkbutton" onclick="onEnsure()">删除</a></td></tr></table></td>
+ 		<td><table border="0" width="100%"><tr><td width="25%">编号：<%=rs.getString("id") %></td><td width="20%">菜品名：<%=rs.getString("name") %></td><td >类型：<%=rs.getString("type") %></td><td width="20%"><img src=<%=rs.getString("url") %>></td><td width="10%"><a class="easyui-linkbutton" onclick="onEdit(<%=rs.getInt("id") %>)">编辑</a></td><td width="10%"><a class="easyui-linkbutton" onclick="onEnsure(<%=rs.getString("id") %>)">删除</a></td></tr></table></td>
  		</tr>
  		<tr>
  		<td>描述：<%=rs.getString("decription") %></td>
@@ -126,17 +126,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		</table>
 
   <script >
-  function  onEdit(){
- 
-    window.open("FoodEdit.jsp","newwindowfood","width=1000,height=500,top=50%,left=50%")
+  function  onEdit(b){
+    $.ajax({ 
+	type: "Get",
+	url: "FoodEdit", 
+	data: {id:b},
+	success: function(data){} 
+	}); 
+    window.open("FoodEdit.jsp","newwindowfood","width=1000,height=500,top=50%,left=50%,location=no,status=no, toolbar=no ")
 
 }
 
-function onEnsure(){
+function onEnsure(b){
 if(window.confirm("确认删除？")){
+       $.ajax({ 
+	type: "Get",
+	url: "Food", 
+	data: {value:"true",id:b},
+	success: function(data){} 
+	}); 
+	window.location.reload(true);
        return true;
    }else{
-       
+     $.ajax({ 
+	type: "Get",
+	url: "Food", 
+	data: {value:"false"},
+	success: function(data){} 
+	}); 
        return false;
     }
 }
@@ -176,10 +193,14 @@ success: function(data){ }
 }
 window.location.replace("Food.jsp?showPage=1");
 }
+
+function onAdd(){
+  window.open("FoodAdd.jsp","newwindowfood","width=1000,height=500,top=50%,left=50%,location=no,status=no, toolbar=no ")
+}
   </script>
  <%  
    rs.next();
-   } 
+  } 
   rs.close();
   con.close();
   }

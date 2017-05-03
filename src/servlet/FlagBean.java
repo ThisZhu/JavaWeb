@@ -2,6 +2,7 @@ package servlet;
 
 public class FlagBean {
 public String flag;
+public int id;
 private static FlagBean flagbean;
 public static FlagBean getInstance(){
 	if(flagbean==null){
@@ -17,4 +18,13 @@ public void setFlag(String flag){
 public String getFlag(){
 	return flag;
 }
+
+public void setId(int id){
+	this.id=id;
+}
+
+public int getId(){
+	return id;
+}
+
 }

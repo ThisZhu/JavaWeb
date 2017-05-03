@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 
  		%>
  		
- 	<table style="background:Gainsboro" width="100%" height="10%" border="1" cellpadding="0" cellspacing="0" align="center">
+ 	<table style="background:#ADD8E6" width="100%" height="10%" border="1" cellpadding="0" cellspacing="0" align="center">
     <tr width="100%" height="2" > 
     <td>
     <table width="100%" >
