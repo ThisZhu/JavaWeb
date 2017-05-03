@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Food1")
 public class Food1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private FlagBean flagbean=FlagBean.getInstance();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -28,6 +28,17 @@ public class Food1 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 response.getWriter().write("food");
+		 System.out.print(request.getParameter("value"));
+		 if(request.getParameter("value").equals("1")){
+			 flagbean.setFlag("1");
+		 }else  if(request.getParameter("value").equals("2")){
+			 flagbean.setFlag("2");
+		 }else if(request.getParameter("value").equals("3")){
+			 flagbean.setFlag("3");
+		 }else  if(request.getParameter("value").equals("4")){
+			 flagbean.setFlag("4");
+		 }
+		 
 	}
 
 	/**
